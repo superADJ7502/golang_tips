@@ -1,0 +1,35 @@
+name: workflows
+on:
+  push:
+    branches:
+      - main
+jobs:
+  job1:
+    name: job1
+    runs-on: [ self-hosted ]
+    steps:
+      - name: Print job1
+        env:
+          MY_JOB1: job1
+        run: |
+          echo $MY_JOB1
+  job2:
+    name: job2
+    needs: [ job1 ]
+    runs-on: [ self-hosted ]
+    steps:
+      - name: Print job2
+        env:
+          MY_JOB2: job2
+        run: |
+          echo $MY_JOB2
+  job3:
+    name: job3
+    needs: [ job1,job2 ]
+    runs-on: [ self-hosted ]
+    steps:
+      - name: Print job3
+        env:
+          MY_JOB3: job3
+        run: |
+          echo $MY_JOB3
